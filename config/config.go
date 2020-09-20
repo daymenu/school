@@ -1,19 +1,15 @@
 package config
 
-// Config Config
-type Config struct {
-	App App
-}
+import (
+	"github.com/daymenu/school/core/db"
+)
 
-// App App
-type App struct {
+// AppConfig Config
+type AppConfig struct {
 	MySQL MySQL
 }
 
 // MySQL MySQL
 type MySQL struct {
-	Host     string
-	Port     int
-	Username string
-	Password string
+	School db.DBConfig
 }

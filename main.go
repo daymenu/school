@@ -6,12 +6,18 @@ import (
 	"time"
 
 	"github.com/daymenu/school/app/model"
+	"github.com/daymenu/school/config"
+	"github.com/daymenu/school/core"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 )
 
 func main() {
+	appConfig := config.AppConfig{}
+	c := core.NewConfig()
+	c.GetConfig(&appConfig)
+
 	db, err := gorm.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/school?charset=utf8&parseTime=True&loc=Local")
 	if err != nil {
 		log.Fatal(err)

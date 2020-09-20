@@ -1,8 +1,14 @@
 package core
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/daymenu/school/config"
+)
 
 func TestNew(t *testing.T) {
+	appConfig := config.AppConfig{}
 	c := NewConfig()
-	t.Fatal()
+	c.GetConfig(&appConfig)
+	t.Fatal(appConfig)
 }

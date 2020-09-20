@@ -5,22 +5,22 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+
+	"gopkg.in/yaml.v2"
 )
 
 var basePath, _ = os.Getwd()
 
-var defaultConfigPath = filepath.Join(basePath, "../resources")
+var defaultConfigPath = filepath.Join(basePath, "/resources")
 
 // Config 配置文件
 type Config struct {
-	config map[string][]byte
+	config []byte
 }
 
 // NewConfig 创建配置类
 func NewConfig(v ...string) *Config {
-	c := Config{
-		config: make(map[string][]byte),
-	}
+	c := Config{}
 	c.Load()
 	return &c
 }
@@ -43,6 +43,10 @@ func (c *Config) Load() {
 		if err != nil {
 			continue
 		}
-		c.config[f.Name()] = cbyte
+		c.config = cbyte
 	}
+}
+
+func (c *Config) GetConfig(v interface{}) {
+	yaml.Unmarshal(c.config, v)
 }
